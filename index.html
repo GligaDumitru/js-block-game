@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Javascript Game - Block me</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Import Google Font Roboto -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div  class="container">
+      <header>
+        <span>Block ME - Javascript Game</span>
+        <span id="userId"></span>
+      </header>
+      <div id="start-stage">
+        <div class="login">
+          <form onsubmit="return loginWithUsername()">
+            <input
+              type="text"
+              id="username"
+              class="default-text"
+              placeholder="Insert your name"
+              required
+              minlength="3"
+            />
+            <button type="submit" class="btn">Start</button>
+          </form>
+        </div>
+      </div>
+      <div id="setup-stage" class="hide">
+        <section class="setup-header">
+            <span class="stage-header first active">Setup Stage 1</span>
+            <span class="stage-header second">Setup Stage 2</span>
+            <span class="stage-header third">Setup Stage 3</span>
+          </section>
+          <div class="game">
+            <section class="game-container">
+              <div class="line">
+                <div class="cell red">
+                  <input type="text" value="" class="input-cell red" value />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell dark" />
+                  <span class="numberId">2</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell block" />
+                  <span class="numberId">3</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell red" />
+                  <span class="numberId">4</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell red" />
+                  <span class="numberId">1</span>
+                </div>
+              </div>
+              <div class="line">
+                <div class="cell">
+                  <input type="text" value="" class="input-cell red" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell dark" />
+                  <span class="numberId">1</span>
+    
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell red" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell dark" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell block" />
+                  <span class="numberId">1</span>
+                </div>
+              </div>
+              <div class="line">
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+              </div>
+              <div class="line">
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+              </div>
+              <div class="line">
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+                <div class="cell">
+                  <input type="text" value="" class="input-cell" />
+                  <span class="numberId">1</span>
+                </div>
+              </div>
+            </section>
+          </div>
+      </div>
+    </div>
+    <div class="container hide">
+      <header>
+        <span>Block ME - Javascript Game</span>
+      </header>
+      <section class="setup-header">
+        <span class="stage-header first active">Setup Stage 1</span>
+        <span class="stage-header second">Setup Stage 2</span>
+        <span class="stage-header third">Setup Stage 3</span>
+      </section>
+
+      <!-- <div class="alert danger">
+        <span class="icon">&#9888;</span>
+        <span class="text">Yey! An Alert here</span>
+        <span class="close">&#120;</span>
+      </div> -->
+      <button class="btn">Next</button>
+      <button class="btn danger">End</button>
+      <button class="btn success">Play</button>
+
+      <div class="game">
+        <section class="game-container">
+          <div class="line">
+            <div class="cell red">
+              <input type="text" value="" class="input-cell red" value />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell dark" />
+              <span class="numberId">2</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell block" />
+              <span class="numberId">3</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell red" />
+              <span class="numberId">4</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell red" />
+              <span class="numberId">1</span>
+            </div>
+          </div>
+          <div class="line">
+            <div class="cell">
+              <input type="text" value="" class="input-cell red" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell dark" />
+              <span class="numberId">1</span>
+
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell red" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell dark" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell block" />
+              <span class="numberId">1</span>
+            </div>
+          </div>
+          <div class="line">
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+          </div>
+          <div class="line">
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+          </div>
+          <div class="line">
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+            <div class="cell">
+              <input type="text" value="" class="input-cell" />
+              <span class="numberId">1</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="setup first">
+        <div class="info">
+          <span class="text"> Number of blocks per line/column? </span>
+          <input
+            type="number"
+            step="1"
+            class="numberInput"
+            min="5"
+            max="10"
+            default="5"
+            placeholder="5"
+            value="5"
+          />
+        </div>
+      </section>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>
