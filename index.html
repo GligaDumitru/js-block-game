@@ -7,18 +7,23 @@
     <title>Javascript Game - Block me</title>
     <link rel="stylesheet" href="style.css" />
     <!-- Import Google Font Roboto -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
       rel="stylesheet"
     />
-  </head>
-  <body>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <div  class="container">
+      <div id='generalAlert' class="alert hide">
+        <span class="icon">&#9888;</span>
+        <span id="generalAlertText" class="text">Yey! An Alert here</span>
+        <span onclick="hide('generalAlert');" class="close">&#120;</span>
+      </div>
       <header>
         <span>Block ME - Javascript Game</span>
-        <span id="userId"></span>
+        <div>
+            <span id="userId"></span>
+            <span id="logout" title="logout" onclick="logout()" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i></span>
+        </div>
       </header>
       <div id="start-stage">
         <div class="login">
@@ -35,128 +40,31 @@
           </form>
         </div>
       </div>
-      <div id="setup-stage" class="hide">
+      <div id="setup-stage-one" class="hide">
         <section class="setup-header">
             <span class="stage-header first active">Setup Stage 1</span>
             <span class="stage-header second">Setup Stage 2</span>
             <span class="stage-header third">Setup Stage 3</span>
           </section>
+
+          <div class="info">
+            <span class="text"> Number of blocks per line/column? </span>
+            <input
+              type="number"
+              id="numberOrRows"
+              step="1"
+              class="numberInput"
+              min="5"
+              max="10"
+              default="5"
+              placeholder="5"
+              onchange='handleChangeNumberRows()'
+              value="5"
+            />
+          </div>
+          <div id="game-container"></div>
           <div class="game">
-            <section class="game-container">
-              <div class="line">
-                <div class="cell red">
-                  <input type="text" value="" class="input-cell red" value />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell dark" />
-                  <span class="numberId">2</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell block" />
-                  <span class="numberId">3</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell red" />
-                  <span class="numberId">4</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell red" />
-                  <span class="numberId">1</span>
-                </div>
-              </div>
-              <div class="line">
-                <div class="cell">
-                  <input type="text" value="" class="input-cell red" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell dark" />
-                  <span class="numberId">1</span>
-    
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell red" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell dark" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell block" />
-                  <span class="numberId">1</span>
-                </div>
-              </div>
-              <div class="line">
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-              </div>
-              <div class="line">
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-              </div>
-              <div class="line">
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-                <div class="cell">
-                  <input type="text" value="" class="input-cell" />
-                  <span class="numberId">1</span>
-                </div>
-              </div>
-            </section>
+            
           </div>
       </div>
     </div>
