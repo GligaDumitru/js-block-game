@@ -1,226 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Javascript Game - Block me</title>
-    <link rel="stylesheet" href="style.css" />
-    <!-- Import Google Font Roboto -->
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <div  class="container">
-      <div id='generalAlert' class="alert hide">
-        <span class="icon">&#9888;</span>
-        <span id="generalAlertText" class="text">Yey! An Alert here</span>
-        <span onclick="hide('generalAlert');" class="close">&#120;</span>
-      </div>
-      <header>
-        <span>Block ME - Javascript Game</span>
-        <div>
-            <span id="userId"></span>
-            <span id="logout" title="logout" onclick="logout()" style="margin-left: 10px;"><i class="fas fa-sign-out-alt"></i></span>
-        </div>
-      </header>
-      <div id="start-stage">
-        <div class="login">
-          <form onsubmit="return loginWithUsername()">
-            <input
-              type="text"
-              id="username"
-              class="default-text"
-              placeholder="Insert your name"
-              required
-              minlength="3"
-            />
-            <button type="submit" class="btn">Start</button>
-          </form>
-        </div>
-      </div>
-      <div id="setup-stage-one" class="hide">
-        <section class="setup-header">
-            <span class="stage-header first active">Setup Stage 1</span>
-            <span class="stage-header second">Setup Stage 2</span>
-            <span class="stage-header third">Setup Stage 3</span>
-          </section>
 
-          <div class="info">
-            <span class="text"> Number of blocks per line/column? </span>
-            <input
-              type="number"
-              id="numberOrRows"
-              step="1"
-              class="numberInput"
-              min="5"
-              max="10"
-              default="5"
-              placeholder="5"
-              onchange='handleChangeNumberRows()'
-              value="5"
-            />
-          </div>
-          <div id="game-container"></div>
-          <div class="game">
-            
-          </div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Javascript Game - Block me</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Import Google Font Roboto -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+  <div class="container m2000">
+    <div id='generalAlert' class="alert hide">
+      <span class="icon">&#9888;</span>
+      <span id="generalAlertText" class="text">Yey! An Alert here</span>
+      <span onclick="hide('generalAlert');" class="close">&#120;</span>
     </div>
-    <div class="container hide">
-      <header>
-        <span>Block ME - Javascript Game</span>
-      </header>
+    <header>
+      <span>Block ME - Javascript Game</span>
+      <div>
+        <span id="userId"></span>
+        <span id="logout" title="logout" onclick="logout()" style="margin-left: 10px;"><i
+            class="fas fa-sign-out-alt"></i></span>
+      </div>
+    </header>
+    <div id="start-stage" class="hide">
+      <div class="login">
+        <form onsubmit="return loginWithUsername()">
+          <input type="text" id="username" class="default-text" placeholder="Insert your name" required minlength="3" />
+          <button type="submit" class="btn">Start</button>
+        </form>
+      </div>
+
+    </div>
+    <div id="setup-stage-one" class="hide">
       <section class="setup-header">
         <span class="stage-header first active">Setup Stage 1</span>
         <span class="stage-header second">Setup Stage 2</span>
         <span class="stage-header third">Setup Stage 3</span>
       </section>
 
-      <!-- <div class="alert danger">
-        <span class="icon">&#9888;</span>
-        <span class="text">Yey! An Alert here</span>
-        <span class="close">&#120;</span>
-      </div> -->
-      <button class="btn">Next</button>
-      <button class="btn danger">End</button>
-      <button class="btn success">Play</button>
-
+      <div class="instructions">
+        <h1>Instructions</h1>
+        <p>
+          Hello, here you need to set the blocks for the game.
+          A <span class="block">block</span> is a cell in the game table that cannot be moved.
+        </p>
+        <p>
+          The player and the PC needs to avoid this cell <span class="block">blocks</span>
+        </p>
+        <p>
+          To add a block on the game, select a cell and write <strong>B</strong> and then <strong>Enter</strong> or
+          click somewhere on the page.
+        </p>
+      </div>
+      <div class="info">
+        <span class="text"> Number of blocks per line/column? </span>
+        <input type="number" id="numberOrRows" step="1" class="numberInput" min="5" max="10" default="5" placeholder="5"
+          onchange='handleChangeNumberRows()' value="5" />
+      </div>
+      <div class="info">
+        <p>Blocks : <span id="numberOfBlocks">0 / 8</span></p>
+      </div>
+      <div id="game-container"></div>
       <div class="game">
-        <section class="game-container">
-          <div class="line">
-            <div class="cell red">
-              <input type="text" value="" class="input-cell red" value />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell dark" />
-              <span class="numberId">2</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell block" />
-              <span class="numberId">3</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell red" />
-              <span class="numberId">4</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell red" />
-              <span class="numberId">1</span>
-            </div>
-          </div>
-          <div class="line">
-            <div class="cell">
-              <input type="text" value="" class="input-cell red" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell dark" />
-              <span class="numberId">1</span>
+      </div>
+      <div class="navigation">
+        <button onclick="back()" id="prevBtn" class="btn hidden">Previous</button>
+        <button onclick="end()" id="endBtn" class="btn danger">End</dbutton>
+          <button onclick="next()" id="nextBtn" class="btn hidden">Next</button>
+      </div>
+    </div>
+    <div id="setup-stage-two" class="hide">
+      <section class="setup-header">
+        <span class="stage-header first ">Setup Stage 1</span>
+        <span class="stage-header second active">Setup Stage 2</span>
+        <span class="stage-header third">Setup Stage 3</span>
+      </section>
 
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell red" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell dark" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell block" />
-              <span class="numberId">1</span>
-            </div>
-          </div>
-          <div class="line">
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-          </div>
-          <div class="line">
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-          </div>
-          <div class="line">
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-            <div class="cell">
-              <input type="text" value="" class="input-cell" />
-              <span class="numberId">1</span>
-            </div>
-          </div>
-        </section>
+      <div class="instructions">
+        <h1>Instructions</h1>
+        <p>
+          Hello, here you need to set the red blocks pieces for the game.
+          A <span class="block red">red block</span> is a cell in the game table that you(the user) need to move in
+          order to win
+        </p>
+        <p>
+          The player needs to move this pieces in order to remove the <span class="block dark">black pieces</span> from
+          the PC
+        </p>
+        <p>
+          To add a red on the game, select an available cell and write <strong>1</strong> or <strong>2</strong> or
+          <strong>3</strong> or <strong>4</strong>.
+          Then click on <strong>Enter</strong> or click somewhere on the page.
+        </p>
+        <p>
+          There are up to 8 red pieces and up to 8 black pieces. Each piece has a number between 1 and 4 on it. There
+          are at most 3 red pieces with the number 1, at most 2 red pieces with the number 2, at most 2 red pieces with
+          the number 3, and at most 1 red piece with the number 4
+        </p>
+      </div>
+      <div class="info">
+        <p>Red Blocks : <span id="numberORedBlocks">0 / 8</span></p>
+      </div>
+      <div id="game-container"></div>
+      <div id="game-container_stage_two"></div>
+      <div class="navigation">
+        <button onclick="back()" class="btn hidden">Previous</button>
+        <button onclick="logout()" class="btn danger">End</dbutton>
+          <button onclick="next()" id="nextBtnTwo" class="btn hidden">Next</button>
+      </div>
+    </div>
+    <div id="setup-stage-three" class="hide">
+      <section class="setup-header">
+        <span class="stage-header first ">Setup Stage 1</span>
+        <span class="stage-header second ">Setup Stage 2</span>
+        <span class="stage-header third active">Setup Stage 3</span>
+      </section>
+
+      <div class="instructions">
+        <h1>Instructions</h1>
+        <p>
+          Hello, here you need to set the black blocks pieces for the game.
+          A <span class="block dark">black block</span> is a cell in the game table that the PC need to move in order to
+          win
+        </p>
+        <p>
+          To add a black on the game, select an available cell and write <strong>1</strong> or <strong>2</strong> or
+          <strong>3</strong> or <strong>4</strong>.
+          Then click on <strong>Enter</strong> or click somewhere on the page.
+        </p>
+        <p>
+          There are up to 8 red pieces and up to 8 black pieces. Each piece has a number between 1 and 4 on it. There
+          are at most 3 red pieces with the number 1, at most 2 red pieces with the number 2, at most 2 red pieces with
+          the number 3, and at most 1 red piece with the number 4
+        </p>
+      </div>
+      <div class="info">
+        <p>Black Blocks : <span id="numberOfBlackBlocks">0 / 8</span></p>
+      </div>
+      <div id="game-container"></div>
+      <div id="game-container_stage_three"></div>
+      <div class="navigation">
+        <button onclick="back()" class="btn">Previous</button>
+        <button onclick="logout()" class="btn danger">End</dbutton>
+          <button onclick="next()" id="nextBtnThree" class="btn hidden">PLAY</button>
+      </div>
+    </div>
+    <div id="stage-play" class="hide">
+      <section class="setup-header">
+        <span class="stage-header user active">User Turn</span>
+        <span class="stage-header pc">PC Turn</span>
+      </section>
+
+      <div class="instructions">
+        <h1>Instructions</h1>
+        <p>
+          It's play time.
+          User Turn: select a <span class="block red">red block</span> and move it using the following:
+          A <span class="block dark">black block</span> is a cell in the game table that the PC need to move in order to
+          win
+        </p>
+        <p>
+          <strong>a</strong> for LEFT
+          <strong>d</strong> for RIGHT
+          <strong>w</strong> for UP
+          <strong>s</strong> for DOWN
+        </p>
+        <p>
+          If the selected piece ends up on a grid cell that contains a black piece, then one piece is eliminated as
+          follows:
+          if either the number of the red piece is greater than the number on the black piece or the number on the red
+          piece is 1 and the number on the black piece is 4 (i.e., 4 > 3, 4 > 2, 4 > 1, 3 > 2, 3 > 1, 1 > 4) then the
+          black piece is eliminated, else the red piece is eliminated. </p>
+      </div>
+      <div class="play-game-container">
+        <div id="game-container_stage_play"></div>
+        <div class="statsAboutGame">
+          <p class="info">Round #<span id="roundNumber">1</span> </p>
+          <p class="round"><span id="totalRedBlocksPlay" class="block red">2</span> <span>Red Pieces Available </span>
+          </p>
+          <p class="round"><span id="totalDarkBlocksPlay" class="block dark">3</span> <span>Red Pieces Available </span>
+          </p>
+          <p class="round"><span id="totalGrayBlocksPlay" class="block">4</span> Block Pieces Available </p>
+        </div>
       </div>
 
-      <section class="setup first">
-        <div class="info">
-          <span class="text"> Number of blocks per line/column? </span>
-          <input
-            type="number"
-            step="1"
-            class="numberInput"
-            min="5"
-            max="10"
-            default="5"
-            placeholder="5"
-            value="5"
-          />
-        </div>
-      </section>
+      <div class="navigation">
+        <button onclick="back()" class="btn hidden">Previous</button>
+        <button onclick="endGame()" class="btn danger">End Game</dbutton>
+          <button onclick="next()" class="btn hidden">PLAY</button>
+      </div>
     </div>
-    <script src="main.js"></script>
+    <div id="stage-play-end" class="hide">
+      <section class="setup-header">
+        <span class="stage-header user" id="winnerIs1">User Won</span>
+      </section>
+      <div class="play-game-container">
+        <div id="game-container_stage_play_end"></div>
+        <div class="statsAboutGame">
+          <p class="info">Round #<span id="roundNumberEnd">1</span> </p>
+          <p class="round"><span id="totalRedBlocksPlayEnd" class="block red">0</span> <span>Red Pieces Available </span>
+          </p>
+          <p class="round"><span id="totalDarkBlocksPlayEnd" class="block dark">0</span> <span>Red Pieces Available </span>
+          </p>
+          <p class="round"><span id="totalGrayBlocksPlayEnd" class="block">0</span> Block Pieces Available </p>
+        </div>
+      </div>
+
+      <div class="navigation">
+        <button onclick="back()" class="btn hidden">Previous</button>
+        <button onclick="logout()" class="btn danger">Start Again</dbutton>
+        <button onclick="next()" class="btn hidden">PLAY</button>
+      </div>
+    </div>
+    <div id="loading" class="loadingContainer hidden">
+      <div>
+        <div class="spinner"></div>
+        <div class="pcTurn">Pc Turn</div>
+      </div>
+     
+    </div>
+  </div>
+  <script src="main.js"></script>
   </body>
 </html>
